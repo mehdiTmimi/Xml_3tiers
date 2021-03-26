@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<etudiants>
+	<etudiant >
+			<id>1</id>
+			<nom>tmimi</nom>
+			<prenom>mehdi</prenom>
+			<dateNaissance>04-06-1992</dateNaissance>
+	</etudiant>
+	<etudiant >
+			<id>2</id>
+			<nom>alaoui</nom>
+			<prenom>alae</prenom>
+			<dateNaissance>30-12-1993</dateNaissance>
+	</etudiant>
+	<etudiant >
+			<id>3</id>
+			<nom>filali</nom>
+			<prenom>Sarah</prenom>
+			<dateNaissance>03-03-2000</dateNaissance>
+	</etudiant>
+</etudiants>
