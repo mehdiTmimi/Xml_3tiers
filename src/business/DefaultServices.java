@@ -2,13 +2,13 @@ package business;
 
 import java.util.List;
 
-import dao.ProduitDao;
-import dao.ProduitXmlDao;
-import models.Produit;
+import dao.TodoDao;
+import dao.TodoXmlDao;
+import models.Todo;
 
 public class DefaultServices implements Services{
 
-	private ProduitDao produitDao;
+	private TodoDao todoDao;
 	private static DefaultServices instance=null;
 	public static DefaultServices getInstance()
 	{
@@ -17,16 +17,33 @@ public class DefaultServices implements Services{
 		return instance;
 	}
 	 private DefaultServices() {
-		 this.produitDao=new ProduitXmlDao();
+		 this.todoDao=new TodoXmlDao();
 	 }
 	@Override
-	public boolean add(Produit produit) {
-		return produitDao.add(produit);
+	public boolean add(Todo todo) {
+		List<Todo> todos=todoDao.getAll();
+		if(todos.size()==0)
+		{
+			todo.setId(1);
+			
+		}
+		else {
+			int max=todos.get(0).getId();
+			for (int i = 1; i < todos.size(); i++) {
+				if(todos.get(i).getId()>max)
+					max=todos.get(i).getId();
+			}
+			max++;
+			todo.setId(max);
+			//todo.setId(++max);
+		}
+		return todoDao.add(todo);
+		
 	}
 
 	@Override
-	public List<Produit> getAll() {
-		return produitDao.getAll();
+	public List<Todo> getAll() {
+		return todoDao.getAll();
 	}
 
 }
