@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import web.actions.AddTodoAction;
 import web.actions.ListToDoAction;
 
-@WebServlet( {"/addTodo","/lists"})
+@WebServlet( {"/"})
 public class ControlerServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("appppppel");
+		
+	
 		String route =req.getRequestURI().substring(req.getRequestURI().lastIndexOf("/")+1);
 		String destination="404.jsp";
 		if(route.equals("addTodo"))
@@ -30,6 +30,20 @@ public class ControlerServlet extends HttpServlet{
 			ListToDoAction listToDoAction=new ListToDoAction();
 			destination = listToDoAction.list(req);
 		}
+		else if(route.equals("listsJson"))
+		{
+			ListToDoAction listToDoAction=new ListToDoAction();
+			resp.getWriter().append(listToDoAction.listJson(req));
+			return;
+		}
+		else if(route.equals("addJson"))
+		{
+		//	resp.setHeader(", value);
+			AddTodoAction addTodoAction=new AddTodoAction();
+			resp.getWriter().append(addTodoAction.addJson(req));
+			return ;
+		}
+		
 		//resp.getWriter().append(destination);
 		req.getRequestDispatcher("/views/"+destination).forward(req, resp);
 	}
